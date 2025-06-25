@@ -10,6 +10,7 @@ import { connectDB } from "./lib/db.js";
 import authRoutes from "./routes/auth.route.js";
 import messageRoutes from "./routes/message.route.js";
 import { app, server } from "./lib/socket.js";
+
 dotenv.config();
 
 const PORT = process.env.PORT;
@@ -34,12 +35,6 @@ if (process.env.NODE_ENV === "production") {
     res.sendFile(path.join(__dirname, "../frontend", "dist", "index.html"));
   });
 }
-console.log("\n🔍 Registered Routes:");
-app._router.stack.forEach((layer) => {
-  if (layer.route && layer.route.path) {
-    console.log(" -", layer.route.path);
-  }
-});
 
 server.listen(PORT, () => {
   console.log("server is running on PORT:" + PORT);
