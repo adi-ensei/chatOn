@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { useAuthStore } from "../store/useAuthStore";
 import {
   Eye,
@@ -11,7 +11,7 @@ import {
 } from "lucide-react";
 import { Link } from "react-router-dom";
 
-import AuthImagePattern from "../components/AuthImagePattern";
+import AuthImagePattern from "./../components/AuthImagePattern";
 import toast from "react-hot-toast";
 
 const SignUpPage = () => {
@@ -23,7 +23,6 @@ const SignUpPage = () => {
   });
 
   const { signup, isSigningUp } = useAuthStore();
-
   const validateForm = () => {
     if (!formData.fullName.trim()) return toast.error("Full name is required");
     if (!formData.email.trim()) return toast.error("Email is required");
@@ -35,32 +34,26 @@ const SignUpPage = () => {
 
     return true;
   };
-
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    const success = validateForm();
-
-    if (success === true) signup(formData);
+    const sucess = validateForm();
+    if (sucess === true) signup(formData);
   };
 
   return (
     <div className="min-h-screen grid lg:grid-cols-2">
-      {/* left side */}
+      {/* Left Side */}
       <div className="flex flex-col justify-center items-center p-6 sm:p-12">
         <div className="w-full max-w-md space-y-8">
-          {/* LOGO */}
+          {/* Logo */}
           <div className="text-center mb-8">
             <div className="flex flex-col items-center gap-2 group">
-              <div
-                className="size-12 rounded-xl bg-primary/10 flex items-center justify-center 
-              group-hover:bg-primary/20 transition-colors"
-              >
+              <div className="size-12 rounded-xl bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
                 <MessageSquare className="size-6 text-primary" />
               </div>
-              <h1 className="text-2xl font-bold mt-2">Create Account</h1>
+              <h1 className="text-xl font-bold mt-2">Create Account</h1>
               <p className="text-base-content/60">
-                Get started with your free account
+                Get Started With Free Account
               </p>
             </div>
           </div>
@@ -77,7 +70,7 @@ const SignUpPage = () => {
                 <input
                   type="text"
                   className={`input input-bordered w-full pl-10`}
-                  placeholder="Enter Your Full Name"
+                  placeholder="Enter Full Name"
                   value={formData.fullName}
                   onChange={(e) =>
                     setFormData({ ...formData, fullName: e.target.value })
@@ -152,7 +145,6 @@ const SignUpPage = () => {
               )}
             </button>
           </form>
-
           <div className="text-center">
             <p className="text-base-content/60">
               Already have an account?{" "}
@@ -163,9 +155,7 @@ const SignUpPage = () => {
           </div>
         </div>
       </div>
-
-      {/* right side */}
-
+      {/* Right side */}
       <AuthImagePattern
         title="Join our community"
         subtitle="Connect with friends, share moments, and stay in touch with your loved ones."
@@ -173,4 +163,5 @@ const SignUpPage = () => {
     </div>
   );
 };
+
 export default SignUpPage;
